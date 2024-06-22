@@ -1,1 +1,124 @@
-<p>register works!</p>
+<section>
+  <form
+    [formGroup]="registerForm"
+    (submit)="handleSubmit()"
+    class="my-5 w-75 mx-auto"
+  >
+    <h1 class="py-3 text-main text-center fw-semibold">Register Form</h1>
+    <div class="form-item mb-2">
+      <label for="name">Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        name="name"
+        id="name"
+        class="form-control"
+      />
+
+      @if(registerForm.get('name')?.getError('maxlength') &&
+      registerForm.get('name')?.touched) {
+
+      <p class="text-danger">Name max length = 20</p>
+      }@else if (registerForm.get('name')?.getError('minlength') &&
+      registerForm.get('name')?.touched) {
+      <p class="text-danger">Name min length = 3</p>
+      } @else if (registerForm.get('name')?.getError('required') &&
+      registerForm.get('name')?.touched) {
+      <p class="text-danger">Name is Required</p>
+
+      }
+    </div>
+    <div class="form-item mb-2">
+      <label for="email">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        name="email"
+        id="email"
+        class="form-control"
+      />
+      @if(registerForm.get('email')?.getError('required') &&
+      registerForm.get('email')?.touched) {
+
+      <p class="text-danger">Email is Required</p>
+      }@else if (registerForm.get('email')?.getError('email') &&
+      registerForm.get('email')?.touched) {
+      <p class="text-danger">email must like {{ "example@example.com" }}</p>
+
+      }
+    </div>
+    <div class="form-item mb-2">
+      <label for="password">Password</label>
+      <input
+        formControlName="password"
+        type="password"
+        name="password"
+        id="password"
+        class="form-control"
+      />
+      @if(registerForm.get('password')?.getError('required') &&
+      registerForm.get('password')?.touched) {
+
+      <p class="text-danger">Password is Required</p>
+      }@else if (registerForm.get('password')?.getError('pattern') &&
+      registerForm.get('password')?.touched) {
+      <p class="text-danger">password must be at least 6 chars</p>
+
+      }
+    </div>
+    <div class="form-item mb-2">
+      <label for="rePassword">RePassword</label>
+      <input
+        formControlName="rePassword"
+        type="password"
+        name="rePassword"
+        id="rePassword"
+        class="form-control"
+      />
+      @if(registerForm.get('rePassword')?.getError('required') &&
+      registerForm.get('rePassword')?.touched) {
+
+      <p class="text-danger">RePassword is Required</p>
+      }@else if (registerForm.get('rePassword')?.getError('pattern') &&
+      registerForm.get('rePassword')?.touched) {
+      <p class="text-danger">RePassword must be at least 6 chars</p>
+
+      }
+    </div>
+    <div class="form-item mb-2">
+      <label for="phone">Phone</label>
+      <input
+        formControlName="phone"
+        type="tel"
+        name="phone"
+        id="phone"
+        class="form-control"
+      />
+      @if(registerForm.get('phone')?.getError('required') &&
+      registerForm.get('phone')?.touched) {
+
+      <p class="text-danger">Phone is Required</p>
+      }@else if (registerForm.get('phone')?.getError('pattern') &&
+      registerForm.get('phone')?.touched) {
+      <p class="text-danger">Accept only egypt phone numbers</p>
+
+      }
+    </div>
+    <button
+      [disabled]="registerForm.invalid"
+      type="submit"
+      class="main-btn float-end"
+    >
+      Register @if(fetching) {
+
+      <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+      }
+    </button>
+    @if(errMsg) {
+
+    <div class="alert alert-danger mt-2">
+      <p class="mb-0">{{ errMsg }}</p>
+    </div>
+    }
+  </form>
+</section>
