@@ -1,1 +1,26 @@
-<p>home works!</p>
+<section>
+  <div class="row">
+    @for(product of products;track product.id) {
+
+    <div class="col-sm-6 col-md-4 col-lg-2 p-2">
+      <div class="card p-2">
+        <div role="button" [routerLink]="['/product', product.id]">
+          <img [src]="product.imageCover" class="w-100" alt="" />
+          <div class="product-details">
+            <h3 class="font-sm text-main">{{ product.category.name }}</h3>
+            <h4 class="font-sm">{{ product.title | cuttext }}</h4>
+            <div class="d-flex justify-content-between">
+              <span>{{ product.price | currency : "EGP" }}</span>
+              <span>
+                <i class="fa-solid fa-star rating-color"></i>
+                {{ product.ratingsAverage }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <button class="main-btn">+ Add To Cart</button>
+      </div>
+    </div>
+    }
+  </div>
+</section>
