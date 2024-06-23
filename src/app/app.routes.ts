@@ -9,17 +9,28 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
+import { authGuard } from './guards/auth.guard';
+import { authChildGuard } from './guards/auth-child.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: BlankLayoutComponent,
+    canActivateChild: [authChildGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'categories', component: CategoriesComponent },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        canActivate: [authGuard],
+      },
       { path: 'brands', component: BrandsComponent },
     ],
   },

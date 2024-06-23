@@ -45,10 +45,11 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.fetching = true;
       this._AuthService.register(this.registerForm.value).subscribe({
-        next: (data) => {
-          console.log(data);
-          this.router.navigate(['/login']);
-          this.fetching = false;
+        next: (res) => {
+          if (res.message == 'success') {
+            this.router.navigate(['/login']);
+            this.fetching = false;
+          }
         },
         error: (err) => {
           this.errMsg = err.error.message;

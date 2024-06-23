@@ -1,1 +1,65 @@
-<p>login works!</p>
+<section>
+  <form
+    class="my-5 w-75 mx-auto"
+    [formGroup]="loginForm"
+    (submit)="handleSubmit()"
+  >
+    <h1 class="py-3 text-main text-center fw-semibold">Login Form</h1>
+    <div class="form-item mb-2">
+      <label for="email">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        name="email"
+        id="email"
+        class="form-control"
+      />
+      @if(loginForm.get('email')?.getError('required') &&
+      loginForm.get('email')?.touched) {
+
+      <p class="text-danger">Email is Required</p>
+      }@else if (loginForm.get('email')?.getError('email') &&
+      loginForm.get('email')?.touched) {
+      <p class="text-danger">email must like {{ "example@example.com" }}</p>
+
+      }
+    </div>
+    <div class="form-item mb-2">
+      <label for="password">Password</label>
+      <input
+        formControlName="password"
+        type="password"
+        name="password"
+        id="password"
+        class="form-control"
+      />
+      @if(loginForm.get('password')?.getError('required') &&
+      loginForm.get('password')?.touched) {
+
+      <p class="text-danger">Password is Required</p>
+      }@else if (loginForm.get('password')?.getError('pattern') &&
+      loginForm.get('password')?.touched) {
+      <p class="text-danger">password must be at least 6 chars</p>
+
+      }
+    </div>
+
+    <button
+      [disabled]="loginForm.invalid"
+      type="submit"
+      class="main-btn float-end"
+    >
+      Sign in @if(fetching) {
+
+      <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+      }
+    </button>
+    <div class="clearfix"></div>
+    @if(errMsg) {
+
+    <div class="alert alert-danger mt-2">
+      <p class="mb-0">{{ errMsg }}</p>
+    </div>
+    }
+  </form>
+</section>

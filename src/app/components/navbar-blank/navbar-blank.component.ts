@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -8,4 +9,9 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar-blank.component.html',
   styleUrl: './navbar-blank.component.scss',
 })
-export class NavbarBlankComponent {}
+export class NavbarBlankComponent {
+  constructor(private _AuthService: AuthService) {}
+  signOut() {
+    this._AuthService.signOut();
+  }
+}
