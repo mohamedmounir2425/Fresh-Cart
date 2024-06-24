@@ -11,4 +11,7 @@ export class ProductsService {
   getProducts(): Observable<any> {
     return this._HttpClient.get(`${environment.apiURL}products`);
   }
+  getProductById(id: string): Observable<any> {
+    return this._HttpClient.get(`${environment.apiURL}products/${id}`);
+  }
 }

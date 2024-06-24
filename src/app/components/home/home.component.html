@@ -3,7 +3,7 @@
     @for(product of products;track product.id) {
 
     <div class="col-sm-6 col-md-4 col-lg-2 p-2">
-      <div class="card p-2">
+      <div class="product">
         <div role="button" [routerLink]="['/product', product.id]">
           <img [src]="product.imageCover" class="w-100" alt="" />
           <div class="product-details">
@@ -18,7 +18,7 @@
             </div>
           </div>
         </div>
-        <button class="main-btn">+ Add To Cart</button>
+        <button class="main-btn w-100">+ Add To Cart</button>
       </div>
     </div>
     }

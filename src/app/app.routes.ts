@@ -11,6 +11,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 import { authGuard } from './guards/auth.guard';
 import { authChildGuard } from './guards/auth-child.guard';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 export const routes: Routes = [
   {
@@ -24,12 +25,14 @@ export const routes: Routes = [
       {
         path: 'products',
         component: ProductsComponent,
-        canActivate: [authGuard],
+      },
+      {
+        path: 'product/:id',
+        component: ProductDetailsComponent,
       },
       {
         path: 'categories',
         component: CategoriesComponent,
-        canActivate: [authGuard],
       },
       { path: 'brands', component: BrandsComponent },
     ],
