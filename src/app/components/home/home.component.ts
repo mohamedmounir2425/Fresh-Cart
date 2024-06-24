@@ -5,17 +5,27 @@ import { CuttextPipe } from '../../pipes/cuttext.pipe';
 import { RouterModule } from '@angular/router';
 import { Category } from '../../Interfaces/category';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from '../../services/cart.service';
+import { ProductComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CurrencyPipe, CuttextPipe, RouterModule, CarouselModule],
+  imports: [
+    CurrencyPipe,
+    CuttextPipe,
+    RouterModule,
+    CarouselModule,
+    ProductComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   products!: any[];
   categories!: Category[];
+  cart!: any[];
+
   mainSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -62,7 +72,10 @@ export class HomeComponent implements OnInit {
     nav: true,
   };
 
-  constructor(private _ProductsService: ProductsService) {}
+  constructor(
+    private _ProductsService: ProductsService,
+    private _CartService: CartService
+  ) {}
   ngOnInit(): void {
     this._ProductsService.getProducts().subscribe({
       next: (res) => {
@@ -74,8 +87,16 @@ export class HomeComponent implements OnInit {
     });
     this._ProductsService.getCategories().subscribe({
       next: (res) => {
-        console.log('cat', res);
         this.categories = res.data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    this._CartService.getCart().subscribe({
+      next: (res) => {
+        console.log(res.data.products);
+        this.cart = res.data.products;
       },
       error: (err) => {
         console.error(err);

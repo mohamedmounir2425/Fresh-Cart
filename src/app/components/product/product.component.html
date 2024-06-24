@@ -1,0 +1,39 @@
+<div class="product">
+  <div role="button" [routerLink]="['/product', product.id]">
+    <img [src]="product.imageCover" class="w-100" alt="" />
+    <div class="product-details">
+      <h3 class="font-sm text-main">{{ product.category.name }}</h3>
+      <h4 class="font-sm">{{ product.title | cuttext }}</h4>
+      <div class="d-flex justify-content-between">
+        <span>{{ product.price | currency : "EGP" }}</span>
+        <span>
+          <i class="fa-solid fa-star rating-color"></i>
+          {{ product.ratingsAverage }}</span
+        >
+      </div>
+    </div>
+  </div>
+  @if(!cartCount) {
+
+  <button (click)="addToCart(product.id)" class="main-btn w-100">
+    + Add To Cart
+  </button>
+  }@else {
+  <div class="cart-operations ms-auto">
+    <div role="button" class="operation">
+      <i class="fa-solid fa-minus"></i>
+    </div>
+    @if(!isLoading) {
+
+    <span class="count">{{ cartCount }}</span>
+    }@else {
+
+    <div class="lds-circle"><div></div></div>
+    }
+    <div (click)="addToCart(product.id)" role="button" class="operation plus">
+      <i class="fa-solid fa-plus"></i>
+    </div>
+    <i class="bi bi-plus"></i>
+  </div>
+  }
+</div>
