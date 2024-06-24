@@ -9,9 +9,12 @@ import { environment } from '../../environments/environment';
 export class ProductsService {
   constructor(private _HttpClient: HttpClient) {}
   getProducts(): Observable<any> {
-    return this._HttpClient.get(`${environment.apiURL}products`);
+    return this._HttpClient.get(`${environment.apiURL}/api/v1/products`);
   }
   getProductById(id: string): Observable<any> {
-    return this._HttpClient.get(`${environment.apiURL}products/${id}`);
+    return this._HttpClient.get(`${environment.apiURL}/api/v1/products/${id}`);
+  }
+  getCategories(): Observable<any> {
+    return this._HttpClient.get(`${environment.apiURL}/api/v1/categories`);
   }
 }

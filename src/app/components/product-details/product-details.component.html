@@ -4,7 +4,16 @@
       @if(product.id) {
 
       <div class="col-md-3">
-        <img [src]="product.imageCover" class="w-100" alt="" />
+        <owl-carousel-o [options]="productOptions">
+          @for(path of product.images;track path) {
+
+          <ng-container>
+            <ng-template carouselSlide>
+              <img height="270" [src]="path" />
+            </ng-template>
+          </ng-container>
+          }
+        </owl-carousel-o>
       </div>
       <div class="col-md-9 d-flex align-items-center">
         <div class="w-100">

@@ -14,10 +14,16 @@ export class AuthService {
   constructor(private _HttpClient: HttpClient, private router: Router) {}
 
   register(userData: RegisterUser): Observable<any> {
-    return this._HttpClient.post(`${environment.apiURL}auth/signup`, userData);
+    return this._HttpClient.post(
+      `${environment.apiURL}/api/v1/auth/signup`,
+      userData
+    );
   }
   login(userData: RegisterUser): Observable<any> {
-    return this._HttpClient.post(`${environment.apiURL}auth/signin`, userData);
+    return this._HttpClient.post(
+      `${environment.apiURL}/api/v1/auth/signin`,
+      userData
+    );
   }
   saveUser() {
     const token = localStorage.getItem('token');
