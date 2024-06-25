@@ -34,7 +34,21 @@
 
             }
           </p>
-          <button class="w-100 main-btn">+ Add To Cart</button>
+          @if(!cartCount) {
+
+          <button (click)="addToCart(product.id)" class="main-btn w-100">
+            <span>
+              @if(isLoading) {<i class="fa-solid fa-spinner fa-spin"></i> }@else
+              {+}
+            </span>
+            Add To Cart
+          </button>
+          }@else {
+          <div class="d-flex justify-content-start">
+            <app-add-remove-cart [id]="product.id" [count]="cartCount" />
+          </div>
+
+          }
         </div>
       </div>
       }
