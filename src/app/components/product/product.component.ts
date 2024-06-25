@@ -10,11 +10,12 @@ import { RouterModule } from '@angular/router';
 import { CuttextPipe } from '../../pipes/cuttext.pipe';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { AddRemoveCartComponent } from '../add-remove-cart/add-remove-cart.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [RouterModule, CuttextPipe, CurrencyPipe],
+  imports: [RouterModule, CuttextPipe, CurrencyPipe, AddRemoveCartComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
@@ -63,5 +64,9 @@ export class ProductComponent implements OnChanges {
         this.isLoading = false;
       },
     });
+  }
+
+  updateProduct(products: any[]) {
+    this.cartCount = 0;
   }
 }

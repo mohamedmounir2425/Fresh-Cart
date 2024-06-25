@@ -16,24 +16,19 @@
   @if(!cartCount) {
 
   <button (click)="addToCart(product.id)" class="main-btn w-100">
-    + Add To Cart
+    <span>
+      @if(isLoading) {<i class="fa-solid fa-spinner fa-spin"></i> }@else {+}
+    </span>
+    Add To Cart
   </button>
   }@else {
-  <div class="cart-operations ms-auto">
-    <div role="button" class="operation">
-      <i class="fa-solid fa-minus"></i>
-    </div>
-    @if(!isLoading) {
-
-    <span class="count">{{ cartCount }}</span>
-    }@else {
-
-    <div class="lds-circle"><div></div></div>
-    }
-    <div (click)="addToCart(product.id)" role="button" class="operation plus">
-      <i class="fa-solid fa-plus"></i>
-    </div>
-    <i class="bi bi-plus"></i>
+  <div class="d-flex justify-content-end">
+    <app-add-remove-cart
+      (products)="updateProduct($event)"
+      [id]="product.id"
+      [count]="cartCount"
+    />
   </div>
+
   }
 </div>
