@@ -1,0 +1,24 @@
+<div class="cart-operations">
+  <button
+    #btn1
+    (click)="changeCount('minus', count - 1, btn1, btn2)"
+    class="operation"
+  >
+    <i class="fa-solid fa-minus"></i>
+  </button>
+  @if(!isLoading) {
+
+  <span class="count">{{ count }}</span>
+  }@else {
+
+  <div class="lds-circle"><div></div></div>
+  }
+  <button
+    #btn2
+    (click)="changeCount('add', count + 1, btn1, btn2)"
+    class="operation plus"
+  >
+    <i class="fa-solid fa-plus"></i>
+  </button>
+  <i class="bi bi-plus"></i>
+</div>
