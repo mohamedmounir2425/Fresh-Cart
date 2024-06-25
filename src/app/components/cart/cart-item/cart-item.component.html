@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <div class="row">
+    <div class="col-4 col-md-2 mb-1 mb-md-0">
+      <img
+        style="max-height: 200px"
+        class="w-100"
+        [src]="item.product.imageCover"
+        alt=""
+      />
+    </div>
+
+    <div class="col-md-10 d-flex flex-column justify-content-center">
+      <div class="row flex-column flex-md-row">
+        <div class="col-md-9">
+          <h4>{{ item.product.title }}</h4>
+          <p class="text-main font-md mb-2">
+            Price: {{ item.count * item.price | currency : "EGY " }}
+          </p>
+        </div>
+        <div
+          class="col-md-3 d-flex justify-content-start justify-content-md-end mb-2"
+        >
+          <app-add-remove-cart
+            (products)="updateCart($event)"
+            [id]="item.product.id"
+            [count]="item.count"
+          />
+        </div>
+      </div>
+      <button
+        #removeBtn
+        (click)="removeCartItem(item.product.id, removeBtn)"
+        class="removeBtn border-0 bg-transparent align-self-start"
+      >
+        @if(isLoading) {<i class="fa-solid fa-spinner fa-spin"></i> }@else {
+        <i class="fa-regular fa-trash-can text-main me-2"></i>} Remove
+      </button>
+    </div>
+  </div>
+</div>
