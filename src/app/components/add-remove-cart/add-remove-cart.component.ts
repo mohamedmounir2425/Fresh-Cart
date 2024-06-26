@@ -20,7 +20,6 @@ export class AddRemoveCartComponent {
   isLoading: boolean = false;
   @Input() id!: string;
   @Input() count!: number;
-  @Output() products: EventEmitter<any[]> = new EventEmitter<any[]>();
   constructor(
     private _CartService: CartService,
     private _Renderer2: Renderer2
@@ -39,7 +38,8 @@ export class AddRemoveCartComponent {
     if (type === 'minus' && count < 1) {
       this._CartService.removeProduct(this.id).subscribe({
         next: ({ data }) => {
-          this.products.emit(data.products);
+          this._CartService.updateCart(data.products);
+          this._CartService.removeCartItemId(this.id);
           this.isLoading = false;
         },
         error: (err) => {

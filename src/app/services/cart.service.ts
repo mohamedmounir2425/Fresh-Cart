@@ -1,12 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  cartSubject: Subject<any[]> = new Subject<any[]>();
+  cartItemId: Subject<string> = new Subject<string>();
   constructor(private _HttpClient: HttpClient) {}
   headers = new HttpHeaders({
     token: localStorage.getItem('token') as string,
@@ -36,5 +38,17 @@ export class CartService {
       { count },
       { headers: this.headers }
     );
+  }
+  updateCart(cart: any[]) {
+    this.cartSubject.next(cart);
+  }
+  removeCartItemId(id: string) {
+    this.cartItemId.next(id);
+  }
+  getCartSubject() {
+    return this.cartSubject.asObservable();
+  }
+  getCartItemIdRemoved() {
+    return this.cartItemId.asObservable();
   }
 }

@@ -3,7 +3,7 @@
   <div class="container my-5 rounded p-3 bg-secondary bg-opacity-25">
     <h3>Shop Cart</h3>
     @for(item of cart;track item._id) {
-    <app-cart-item [item]="item" (cart)="getCartItems($event)" />
+    <app-cart-item [item]="item" />
     <hr class="d-block d-md-none" />
     }
   </div>

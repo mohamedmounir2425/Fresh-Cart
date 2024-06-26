@@ -23,11 +23,7 @@
   </button>
   }@else {
   <div class="d-flex justify-content-end">
-    <app-add-remove-cart
-      (products)="updateProduct($event)"
-      [id]="product.id"
-      [count]="cartCount"
-    />
+    <app-add-remove-cart [id]="product.id" [count]="cartCount" />
   </div>
 
   }

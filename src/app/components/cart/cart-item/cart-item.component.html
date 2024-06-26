@@ -20,11 +20,7 @@
         <div
           class="col-md-3 d-flex justify-content-start justify-content-md-end mb-2"
         >
-          <app-add-remove-cart
-            (products)="updateCart($event)"
-            [id]="item.product.id"
-            [count]="item.count"
-          />
+          <app-add-remove-cart [id]="item.product.id" [count]="item.count" />
         </div>
       </div>
       <button

@@ -25,11 +25,9 @@ export class CartComponent implements OnInit {
         console.error(err);
       },
     });
-  }
-  getCartItems(cart: any[]) {
-    this.cart = cart;
-  }
-  updateCart(cart: any[]) {
-    this.cart = cart;
+    this._CartService.getCartSubject().subscribe({
+      next: (res) => (this.cart = res),
+      error: (err) => console.log(err),
+    });
   }
 }

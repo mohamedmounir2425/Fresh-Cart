@@ -95,8 +95,15 @@ export class HomeComponent implements OnInit {
     });
     this._CartService.getCart().subscribe({
       next: (res) => {
-        console.log(res.data.products);
         this.cart = res.data.products;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    this._CartService.getCartSubject().subscribe({
+      next: (res) => {
+        this.cart = res;
       },
       error: (err) => {
         console.error(err);

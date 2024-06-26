@@ -19,7 +19,7 @@ import { AddRemoveCartComponent } from '../add-remove-cart/add-remove-cart.compo
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
-export class ProductComponent implements OnChanges {
+export class ProductComponent implements OnChanges, OnInit {
   @Input() product: any;
   @Input() cart: any[] | undefined;
   cartCount: number = 0;
@@ -28,6 +28,14 @@ export class ProductComponent implements OnChanges {
     private _CartService: CartService,
     private toastr: ToastrService
   ) {}
+  ngOnInit(): void {
+    this._CartService.getCartItemIdRemoved().subscribe({
+      next: (res) => {
+        if (this.product.id == res) this.cartCount = 0;
+      },
+      error: (err) => console.log(err),
+    });
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['cart']) {
       this.updateCartCount();
@@ -48,7 +56,6 @@ export class ProductComponent implements OnChanges {
     this.isLoading = true;
     this._CartService.addToCart(productId).subscribe({
       next: (res) => {
-        console.log(res);
         if (res.status === 'success') {
           this.cartCount = res.data.products.find(
             (p: any) => p.product === this.product._id
@@ -64,9 +71,5 @@ export class ProductComponent implements OnChanges {
         this.isLoading = false;
       },
     });
-  }
-
-  updateProduct(products: any[]) {
-    this.cartCount = 0;
   }
 }

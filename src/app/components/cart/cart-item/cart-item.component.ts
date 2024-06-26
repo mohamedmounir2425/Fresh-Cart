@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CartItemComponent {
   @Input() item: any;
-  @Output() cart: EventEmitter<any[]> = new EventEmitter<any[]>();
+  // @Output() cart: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   isLoading: boolean = false;
   constructor(
@@ -32,13 +32,12 @@ export class CartItemComponent {
     this._Renderer2.setAttribute(btnRef, 'disabled', 'true');
     this._CartService.removeProduct(id).subscribe({
       next: ({ data }) => {
-        this.cart.emit(data.products);
-        this.cart.emit(data.products);
+        this._CartService.updateCart(data.products || []);
         this.isLoading = false;
+        this._Renderer2.removeAttribute(btnRef, 'disabled');
         this.toastr.success('deleted successfully', undefined, {
           timeOut: 3000,
         });
-        this._Renderer2.removeAttribute(btnRef, 'disabled');
       },
       error: (err) => {
         console.error(err);
@@ -46,8 +45,5 @@ export class CartItemComponent {
         this.isLoading = false;
       },
     });
-  }
-  updateCart(cart: any[]) {
-    this.cart.emit(cart);
   }
 }
