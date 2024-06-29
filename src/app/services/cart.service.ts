@@ -10,34 +10,22 @@ export class CartService {
   cartSubject: Subject<any[]> = new Subject<any[]>();
   cartItemId: Subject<string> = new Subject<string>();
   constructor(private _HttpClient: HttpClient) {}
-  headers = new HttpHeaders({
-    token: localStorage.getItem('token') as string,
-  });
+
   addToCart(productId: string): Observable<any> {
-    return this._HttpClient.post(
-      `${environment.apiURL}/api/v1/cart`,
-      { productId },
-      {
-        headers: this.headers,
-      }
-    );
+    return this._HttpClient.post(`${environment.apiURL}/api/v1/cart`, {
+      productId,
+    });
   }
   getCart(): Observable<any> {
-    return this._HttpClient.get(`${environment.apiURL}/api/v1/cart`, {
-      headers: this.headers,
-    });
+    return this._HttpClient.get(`${environment.apiURL}/api/v1/cart`);
   }
   removeProduct(id: string): Observable<any> {
-    return this._HttpClient.delete(`${environment.apiURL}/api/v1/cart/${id}`, {
-      headers: this.headers,
-    });
+    return this._HttpClient.delete(`${environment.apiURL}/api/v1/cart/${id}`);
   }
   changeCount(id: string, count: string): Observable<any> {
-    return this._HttpClient.put(
-      `${environment.apiURL}/api/v1/cart/${id}`,
-      { count },
-      { headers: this.headers }
-    );
+    return this._HttpClient.put(`${environment.apiURL}/api/v1/cart/${id}`, {
+      count,
+    });
   }
   updateCart(cart: any[]) {
     this.cartSubject.next(cart);
@@ -50,5 +38,13 @@ export class CartService {
   }
   getCartItemIdRemoved() {
     return this.cartItemId.asObservable();
+  }
+  checkout(cartId: string, cartDetails: object): Observable<any> {
+    return this._HttpClient.post(
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${environment.appURL}`,
+      {
+        shippingAddress: cartDetails,
+      }
+    );
   }
 }

@@ -1,4 +1,4 @@
-<section class="vh-100">
+<section class="min-vh-100">
   @if(cart.length !== 0 ) {
   <div class="container my-5 rounded p-3 bg-secondary bg-opacity-25">
     <h3>Shop Cart</h3>
@@ -6,6 +6,13 @@
     <app-cart-item [item]="item" />
     <hr class="d-block d-md-none" />
     }
+    <button
+      [routerLink]="['/payment']"
+      [queryParams]="{cartId}"
+      class="main-btn mt-3"
+    >
+      online Payment <img src="/assets/images/visa.png" height="35" alt="" />
+    </button>
   </div>
 
   }@else {

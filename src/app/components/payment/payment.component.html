@@ -1,0 +1,94 @@
+<section class="min-vh-100">
+  <div class="container my-5 rounded p-3 bg-secondary bg-opacity-25">
+    <h1 class="py-3 text-main text-center fw-semibold">Payment</h1>
+    <form
+      [formGroup]="paymentForm"
+      (ngSubmit)="handleSubmit()"
+      class="mb-5 w-75 mx-auto"
+    >
+      <div class="form-item mb-2">
+        <label for="details">Details</label>
+        <input
+          formControlName="details"
+          type="text"
+          name="details"
+          id="details"
+          class="form-control"
+        />
+
+        @if(paymentForm.get('details')?.getError('maxlength') &&
+        paymentForm.get('details')?.touched) {
+
+        <p class="text-danger">Details max length = 60</p>
+        }@else if (paymentForm.get('details')?.getError('minlength') &&
+        paymentForm.get('details')?.touched) {
+        <p class="text-danger">Details min length = 3</p>
+        } @else if (paymentForm.get('details')?.getError('required') &&
+        paymentForm.get('details')?.touched) {
+        <p class="text-danger">Details is Required</p>
+
+        }
+      </div>
+
+      <div class="form-item mb-2">
+        <label for="phone">Phone</label>
+        <input
+          formControlName="phone"
+          type="tel"
+          name="phone"
+          id="phone"
+          class="form-control"
+        />
+        @if(paymentForm.get('phone')?.getError('required') &&
+        paymentForm.get('phone')?.touched) {
+
+        <p class="text-danger">Phone is Required</p>
+        }@else if (paymentForm.get('phone')?.getError('pattern') &&
+        paymentForm.get('phone')?.touched) {
+        <p class="text-danger">Accept only egypt phone numbers</p>
+
+        }
+      </div>
+      <div class="form-item mb-2">
+        <label for="city">City</label>
+        <input
+          formControlName="city"
+          type="text"
+          name="city"
+          id="city"
+          class="form-control"
+        />
+
+        @if(paymentForm.get('city')?.getError('maxlength') &&
+        paymentForm.get('city')?.touched) {
+
+        <p class="text-danger">City max length = 20</p>
+        }@else if (paymentForm.get('city')?.getError('minlength') &&
+        paymentForm.get('city')?.touched) {
+        <p class="text-danger">City min length = 3</p>
+        } @else if (paymentForm.get('city')?.getError('required') &&
+        paymentForm.get('city')?.touched) {
+        <p class="text-danger">City is Required</p>
+
+        }
+      </div>
+      <button
+        [disabled]="paymentForm.invalid"
+        type="submit"
+        class="main-btn float-end"
+      >
+        Checkout @if(fetching) {
+
+        <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+        }
+      </button>
+      <div class="clearfix"></div>
+      @if(errMsg) {
+
+      <div class="alert alert-danger mt-2">
+        <p class="mb-0">{{ errMsg }}</p>
+      </div>
+      }
+    </form>
+  </div>
+</section>
