@@ -52,6 +52,11 @@ body {
   padding: 5px;
   border-radius: 5px;
 }
+.line {
+  width: 100px;
+  height: 4px;
+  background-color: $main-color;
+}
 @mixin mobile {
   @media (max-width: 768px) {
     @content;

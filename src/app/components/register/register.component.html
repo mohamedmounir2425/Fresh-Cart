@@ -79,9 +79,9 @@
       registerForm.get('rePassword')?.touched) {
 
       <p class="text-danger">RePassword is Required</p>
-      }@else if (registerForm.get('rePassword')?.getError('pattern') &&
+      }@else if (registerForm.get('rePassword')?.getError('mismatch') &&
       registerForm.get('rePassword')?.touched) {
-      <p class="text-danger">RePassword must be at least 6 chars</p>
+      <p class="text-danger">Password confirmation is Incorrect</p>
 
       }
     </div>

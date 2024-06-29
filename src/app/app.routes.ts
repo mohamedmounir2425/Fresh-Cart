@@ -13,6 +13,7 @@ import { authGuard } from './guards/auth.guard';
 import { authChildGuard } from './guards/auth-child.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'allorders', component: AllOrdersComponent },
       { path: 'payment', component: PaymentComponent },
       {
         path: 'products',

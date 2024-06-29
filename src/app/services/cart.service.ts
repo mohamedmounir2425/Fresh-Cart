@@ -47,4 +47,9 @@ export class CartService {
       }
     );
   }
+  getAllOrder(userId: string): Observable<any> {
+    return this._HttpClient.get(
+      `${environment.apiURL}/api/v1/orders/user/${userId}`
+    );
+  }
 }

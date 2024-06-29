@@ -3,6 +3,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormControl,
+  FormControlOptions,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -20,26 +21,36 @@ export class RegisterComponent {
   errMsg: string = '';
   fetching: boolean = false;
   constructor(private _AuthService: AuthService, private router: Router) {}
-  registerForm: FormGroup = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^\w{6,}$/),
-    ]),
-    rePassword: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^\w{6,}$/),
-    ]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^01[0125]\d{8}$/),
-    ]),
-  });
+  registerForm: FormGroup = new FormGroup(
+    {
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\w{6,}$/),
+      ]),
+      rePassword: new FormControl(''),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^01[0125]\d{8}$/),
+      ]),
+    },
+    { validators: [this.confirmPassword] } as FormControlOptions
+  );
+
+  confirmPassword(group: FormGroup): void {
+    const password = group.get('password');
+    const rePassword = group.get('rePassword');
+    if (rePassword?.value == '') {
+      rePassword.setErrors({ required: true });
+    } else if (password?.value != rePassword?.value) {
+      rePassword?.setErrors({ mismatch: true });
+    }
+  }
 
   handleSubmit() {
     if (this.registerForm.valid) {
