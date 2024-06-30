@@ -26,10 +26,9 @@
         <p class="h5">User Name: {{ product.user.name }}</p>
         <p class="mb-0">Order Time: {{ product.updatedAt | date : "short" }}</p>
       </div>
-      <div
-        class="row align-items-center p-3 border-bottom"
-        *ngFor="let item of product.cartItems"
-      >
+      @for(item of product.cartItems; track item.product.id) {
+
+      <div class="row align-items-center p-3 border-bottom">
         <div class="col-md-1">
           <img
             [src]="item.product.imageCover"
@@ -45,6 +44,7 @@
           <p>{{ item.price | currency : " EGP " }}</p>
         </div>
       </div>
+      }
     </div>
     }
   </div>
