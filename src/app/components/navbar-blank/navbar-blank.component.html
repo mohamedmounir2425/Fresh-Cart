@@ -57,8 +57,34 @@
           <i class="fab fa-linkedin me-3 fs-5"></i>
           <i class="fa-brands fa-instagram me-3 fs-5"></i>
         </li>
-        <li (click)="signOut()" class="nav-item" role="button">
+        <li (click)="signOut()" class="nav-item me-3" role="button">
           <span>Sign out</span>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-gear"></i>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdown"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="/allorders">All Orders</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" routerLink="/updatePassword"
+                >update password</a
+              >
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

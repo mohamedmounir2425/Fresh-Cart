@@ -1,7 +1,5 @@
 @import "../../../styles.scss";
-.navbar-nav li i {
-  transition: all 0.3s ease-in-out;
-}
-.navbar-nav li i:hover {
-  color: $main-color;
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: $main-color !important;
 }
