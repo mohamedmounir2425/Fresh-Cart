@@ -11,6 +11,7 @@ import { CuttextPipe } from '../../pipes/cuttext.pipe';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { AddRemoveCartComponent } from '../add-remove-cart/add-remove-cart.component';
+import { WishListService } from '../../services/wish-list.service';
 
 @Component({
   selector: 'app-product',
@@ -21,12 +22,16 @@ import { AddRemoveCartComponent } from '../add-remove-cart/add-remove-cart.compo
 })
 export class ProductComponent implements OnChanges, OnInit {
   @Input() product: any;
+  @Input() wishListData: string[] = [];
   @Input() cart: any[] | undefined;
   cartCount: number = 0;
   isLoading: boolean = false;
+  isFavLoading: boolean = false;
+
   constructor(
     private _CartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _WishListService: WishListService
   ) {}
   ngOnInit(): void {
     this._CartService.getCartItemIdRemoved().subscribe({
@@ -70,6 +75,39 @@ export class ProductComponent implements OnChanges, OnInit {
       error: (err) => {
         console.log(err);
         this.isLoading = false;
+      },
+    });
+  }
+
+  addToWishList(productId: string) {
+    this.isFavLoading = true;
+    this._WishListService.addToWishList(productId).subscribe({
+      next: (response: any) => {
+        this.isFavLoading = false;
+        this.toastr.success(response.message, response.status);
+        this._WishListService.favNum.next(response.data.length);
+        this.wishListData = response.data;
+        console.log(response);
+      },
+      error: (err) => {
+        console.log(err);
+        this.isFavLoading = false;
+      },
+    });
+  }
+  removeFav(productId: string) {
+    this.isFavLoading = true;
+    this._WishListService.removeWishList(productId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.toastr.error(response.message, response.status);
+        this._WishListService.favNum.next(response.data.length);
+        this.wishListData = response.data;
+        this.isFavLoading = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.isFavLoading = false;
       },
     });
   }

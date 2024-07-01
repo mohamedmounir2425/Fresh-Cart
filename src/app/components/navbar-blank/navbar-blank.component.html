@@ -58,8 +58,20 @@
           <i class="fab fa-linkedin me-3 fs-5"></i>
           <i class="fa-brands fa-instagram me-3 fs-5"></i>
         </li> -->
-
-        <li routerLink="/cart" class="nav-item" role="button" title="Your Cart">
+        <li class="nav-item" role="button" title="Wish List">
+          <div class="m-3 position-relative mx-md-3">
+            <i routerLink="/wishList" class="fa fs-3 fa-heart text-danger"></i>
+            <span class="cartNum badge bg-danger position-absolute">
+              {{ favCount }}
+            </span>
+          </div>
+        </li>
+        <li
+          routerLink="/cart"
+          class="nav-item me-2"
+          role="button"
+          title="Your Cart"
+        >
           <div class="position-relative m-3">
             <i
               routerLink="/cart"

@@ -1,5 +1,31 @@
 <div class="product">
-  <div role="button" [routerLink]="['/product', product.id]">
+  <div style="width: 25px; height: 25px">
+    @if (isFavLoading) {
+    <div
+      style="cursor: not-allowed"
+      class="loadingio-spinner-heart-2by998twmg8"
+    >
+      <div class="ldio-yzaezf3dcmj">
+        <div><div></div></div>
+      </div>
+    </div>
+    }@else { @if(!wishListData.includes(product._id)) {
+    <i
+      style="cursor: pointer"
+      class="far fa-heart fa-xl cursor-pointer"
+      (click)="addToWishList(product._id)"
+    ></i>
+
+    } @else if(wishListData.includes(product._id)) {
+
+    <i
+      style="cursor: pointer"
+      class="fas fa-heart fa-xl cursor-pointer text-danger"
+      (click)="removeFav(product._id)"
+    ></i>
+    } }
+  </div>
+  <div class="mt-1" role="button" [routerLink]="['/product', product.id]">
     <img [src]="product.imageCover" class="w-100" alt="" />
     <div class="product-details">
       <h3 class="font-sm text-main">{{ product.category.name }}</h3>

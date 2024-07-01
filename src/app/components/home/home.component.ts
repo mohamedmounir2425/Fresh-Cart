@@ -7,6 +7,7 @@ import { Category } from '../../Interfaces/category';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CartService } from '../../services/cart.service';
 import { ProductComponent } from '../product/product.component';
+import { WishListService } from '../../services/wish-list.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   products!: any[];
   categories!: Category[];
   cart!: any[];
-
+  wishListData: string[] = [];
   mainSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -74,7 +75,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _ProductsService: ProductsService,
-    private _CartService: CartService
+    private _CartService: CartService,
+    private _WishListService: WishListService
   ) {}
   ngOnInit(): void {
     this._ProductsService.getProducts().subscribe({
@@ -108,6 +110,13 @@ export class HomeComponent implements OnInit {
       error: (err) => {
         console.error(err);
       },
+    });
+    this._WishListService.getUserWishList().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.wishListData = res.data.map((item: any) => item._id);
+      },
+      error: (err) => console.log(err),
     });
   }
 }

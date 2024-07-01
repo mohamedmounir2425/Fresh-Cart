@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './../../services/auth.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { WishListService } from '../../services/wish-list.service';
 
 @Component({
   selector: 'app-navbar-blank',
@@ -14,18 +15,27 @@ import { RouterModule } from '@angular/router';
 export class NavbarBlankComponent implements OnInit {
   scrolled: boolean = false;
   cartCount: number = 0;
+  favCount: number = 0;
   @HostListener('window:scroll')
   onWindowScroll() {
     this.scrolled = window.scrollY > 0;
   }
   constructor(
     private _AuthService: AuthService,
-    private _CartService: CartService
+    private _CartService: CartService,
+    private _WishListService: WishListService
   ) {}
   ngOnInit(): void {
     this._CartService.getCart().subscribe({
       next: (res) => {
         this.cartCount = res.numOfCartItems;
+      },
+      error: (err) => console.log(err),
+    });
+    this._WishListService.getUserWishList().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.favCount = res.count;
       },
       error: (err) => console.log(err),
     });
