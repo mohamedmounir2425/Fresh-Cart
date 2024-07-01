@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +9,14 @@ import { Observable, Subject } from 'rxjs';
 export class CartService {
   cartSubject: Subject<any[]> = new Subject<any[]>();
   cartItemId: Subject<string> = new Subject<string>();
+  cartCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   constructor(private _HttpClient: HttpClient) {}
 
+  updateCartCount(numItems: number) {
+    console.log(numItems);
+
+    this.cartCount.next(numItems);
+  }
   addToCart(productId: string): Observable<any> {
     return this._HttpClient.post(`${environment.apiURL}/api/v1/cart`, {
       productId,

@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <div class="container-fluid">
+<nav
+  class="navbar navbar-expand-md navbar-light bg-light fixed-top"
+  [class.scrolled]="scrolled"
+>
+  <div class="container">
     <a class="navbar-brand" routerLink="/">
       <img src="/assets/images/freshcart-logo.svg" alt="" />
     </a>
@@ -21,11 +24,7 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link" routerLink="/cart"
-            >Cart</a
-          >
-        </li>
+
         <li class="nav-item">
           <a
             class="nav-link"
@@ -51,14 +50,25 @@
           >
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
-        <li class="nav-item" role="button">
+      <ul
+        class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-start align-items-md-center"
+      >
+        <!-- <li class="nav-item" role="button">
           <i class="fab fa-facebook me-3 fs-5"></i>
           <i class="fab fa-linkedin me-3 fs-5"></i>
           <i class="fa-brands fa-instagram me-3 fs-5"></i>
-        </li>
-        <li (click)="signOut()" class="nav-item me-3" role="button">
-          <span>Sign out</span>
+        </li> -->
+
+        <li routerLink="/cart" class="nav-item" role="button" title="Your Cart">
+          <div class="position-relative m-3">
+            <i
+              routerLink="/cart"
+              class="fa fs-4 fa-shopping-cart text-main"
+            ></i>
+            <span class="cartNum badge bg-main position-absolute">
+              {{ cartCount }}
+            </span>
+          </div>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -78,11 +88,17 @@
             <li>
               <a class="dropdown-item" routerLink="/allorders">All Orders</a>
             </li>
-            <li><hr class="dropdown-divider" /></li>
             <li>
               <a class="dropdown-item" routerLink="/updatePassword"
                 >update password</a
               >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li (click)="signOut()" class="dropdown-item me-3" role="button">
+              <span>
+                <i class="fa-solid fa-right-from-bracket me-1"></i>
+                Sign out
+              </span>
             </li>
           </ul>
         </li>

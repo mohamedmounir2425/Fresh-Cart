@@ -57,6 +57,7 @@ export class ProductComponent implements OnChanges, OnInit {
     this._CartService.addToCart(productId).subscribe({
       next: (res) => {
         if (res.status === 'success') {
+          this._CartService.updateCartCount(res.numOfCartItems);
           this.cartCount = res.data.products.find(
             (p: any) => p.product === this.product._id
           ).count;

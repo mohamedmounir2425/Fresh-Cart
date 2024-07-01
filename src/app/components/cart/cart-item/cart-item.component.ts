@@ -31,8 +31,9 @@ export class CartItemComponent {
     this.isLoading = true;
     this._Renderer2.setAttribute(btnRef, 'disabled', 'true');
     this._CartService.removeProduct(id).subscribe({
-      next: ({ data }) => {
-        this._CartService.updateCart(data.products || []);
+      next: (res) => {
+        this._CartService.updateCartCount(res.numOfCartItems);
+        this._CartService.updateCart(res.data.products || []);
         this.isLoading = false;
         this._Renderer2.removeAttribute(btnRef, 'disabled');
         this.toastr.success('deleted successfully', undefined, {

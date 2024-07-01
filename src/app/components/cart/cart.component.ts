@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
-  cart!: any[];
+  cart: any[] = [];
   cartId!: string;
   constructor(private _CartService: CartService) {}
   ngOnInit(): void {
@@ -27,7 +27,6 @@ export class CartComponent implements OnInit {
       next: (res) => {
         this.cart = res.data.products;
         this.cartId = res.data._id;
-        console.log(this.cart);
       },
       error: (err) => {
         console.error(err);

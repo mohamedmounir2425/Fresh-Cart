@@ -37,8 +37,10 @@ export class AddRemoveCartComponent {
 
     if (type === 'minus' && count < 1) {
       this._CartService.removeProduct(this.id).subscribe({
-        next: ({ data }) => {
-          this._CartService.updateCart(data.products);
+        next: (res) => {
+          console.log(res);
+          this._CartService.updateCartCount(res.numOfCartItems);
+          this._CartService.updateCart(res.data.products);
           this._CartService.removeCartItemId(this.id);
           this.isLoading = false;
         },
