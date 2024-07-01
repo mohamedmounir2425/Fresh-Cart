@@ -87,7 +87,7 @@ export class ProductComponent implements OnChanges, OnInit {
         this.toastr.success(response.message, response.status);
         this._WishListService.favNum.next(response.data.length);
         this.wishListData = response.data;
-        console.log(response);
+        this._WishListService.updateWishListData(productId);
       },
       error: (err) => {
         console.log(err);
@@ -99,11 +99,11 @@ export class ProductComponent implements OnChanges, OnInit {
     this.isFavLoading = true;
     this._WishListService.removeWishList(productId).subscribe({
       next: (response) => {
-        console.log(response);
         this.toastr.error(response.message, response.status);
         this._WishListService.favNum.next(response.data.length);
         this.wishListData = response.data;
         this.isFavLoading = false;
+        this._WishListService.updateWishListData(productId);
       },
       error: (err) => {
         console.log(err);

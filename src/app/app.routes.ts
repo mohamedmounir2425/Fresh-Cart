@@ -12,6 +12,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { authChildGuard } from './guards/auth-child.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'wishList', component: WishListComponent },
       {
         path: 'allorders',
         loadComponent: () =>

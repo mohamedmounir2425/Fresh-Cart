@@ -39,6 +39,12 @@ export class NavbarBlankComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+    this._WishListService.favNum.subscribe({
+      next: (res) => {
+        this.favCount = res;
+      },
+      error: (err) => console.log(err),
+    });
     this._CartService.cartCount.subscribe({
       next: (res) => {
         this.cartCount = res;
