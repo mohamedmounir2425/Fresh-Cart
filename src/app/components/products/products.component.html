@@ -1,1 +1,17 @@
-<p>products works!</p>
+@if(!isLoading) {
+<section>
+  <div class="row">
+    @for(product of products;track product.id) {
+    <div class="col-sm-6 col-md-4 col-lg-2 p-2">
+      <app-product
+        [product]="product"
+        [cart]="cart"
+        [wishListData]="wishListData"
+      ></app-product>
+    </div>
+    }
+  </div>
+</section>
+}@else {
+<app-loading-products></app-loading-products>
+}

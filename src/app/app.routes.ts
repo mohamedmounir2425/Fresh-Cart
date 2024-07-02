@@ -7,12 +7,13 @@ import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { ProductsComponent } from './components/products/products.component';
+
 import { RegisterComponent } from './components/register/register.component';
 import { authChildGuard } from './guards/auth-child.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { ProductsPageComponent } from './components/productsPage/productsPage.component';
 
 export const routes: Routes = [
   {
@@ -41,7 +42,7 @@ export const routes: Routes = [
       },
       {
         path: 'products',
-        component: ProductsComponent,
+        component: ProductsPageComponent,
       },
       {
         path: 'product/:id',

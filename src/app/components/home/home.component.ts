@@ -8,6 +8,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CartService } from '../../services/cart.service';
 import { ProductComponent } from '../product/product.component';
 import { WishListService } from '../../services/wish-list.service';
+import { ProductsComponent } from '../products/products.component';
 
 @Component({
   selector: 'app-home',
@@ -18,15 +19,14 @@ import { WishListService } from '../../services/wish-list.service';
     RouterModule,
     CarouselModule,
     ProductComponent,
+    ProductsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  products!: any[];
   categories!: Category[];
-  cart!: any[];
-  wishListData: string[] = [];
+
   mainSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -73,20 +73,8 @@ export class HomeComponent implements OnInit {
     nav: true,
   };
 
-  constructor(
-    private _ProductsService: ProductsService,
-    private _CartService: CartService,
-    private _WishListService: WishListService
-  ) {}
+  constructor(private _ProductsService: ProductsService) {}
   ngOnInit(): void {
-    this._ProductsService.getProducts().subscribe({
-      next: (res) => {
-        this.products = res.data;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
     this._ProductsService.getCategories().subscribe({
       next: (res) => {
         this.categories = res.data;
@@ -94,29 +82,6 @@ export class HomeComponent implements OnInit {
       error: (err) => {
         console.error(err);
       },
-    });
-    this._CartService.getCart().subscribe({
-      next: (res) => {
-        this.cart = res.data.products;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
-    this._CartService.getCartSubject().subscribe({
-      next: (res) => {
-        this.cart = res;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
-    this._WishListService.getUserWishList().subscribe({
-      next: (res) => {
-        console.log(res);
-        this.wishListData = res.data.map((item: any) => item._id);
-      },
-      error: (err) => console.log(err),
     });
   }
 }
