@@ -1,0 +1,11 @@
+@import "../../../styles.scss";
+.footer-download-app {
+  img {
+    width: 90px;
+  }
+  @include tablet {
+    img {
+      //   width: 50px;
+    }
+  }
+}
