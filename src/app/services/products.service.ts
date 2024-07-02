@@ -8,8 +8,10 @@ import { environment } from '../../environments/environment';
 })
 export class ProductsService {
   constructor(private _HttpClient: HttpClient) {}
-  getProducts(): Observable<any> {
-    return this._HttpClient.get(`${environment.apiURL}/api/v1/products`);
+  getProducts(pageNums: number = 1): Observable<any> {
+    return this._HttpClient.get(
+      `${environment.apiURL}/api/v1/products?page=${pageNums}&limit=18`
+    );
   }
   getProductById(id: string): Observable<any> {
     return this._HttpClient.get(`${environment.apiURL}/api/v1/products/${id}`);

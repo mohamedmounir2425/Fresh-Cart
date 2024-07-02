@@ -1,0 +1,8 @@
+@import "../../../styles.scss";
+.ngx-pagination .current {
+  background: $main-color !important;
+  border-radius: 5px;
+}
+.ngx-pagination a {
+  text-decoration: none !important;
+}
