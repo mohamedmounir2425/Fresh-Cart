@@ -27,7 +27,13 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'cart', component: CartComponent },
       { path: 'wishList', component: WishListComponent },
-
+      {
+        path: 'updatePasswordHome',
+        loadComponent: () =>
+          import(
+            './components/settings/update-password/update-password.component'
+          ).then((m) => m.UpdatePasswordComponent),
+      },
       {
         path: 'allorders',
         loadComponent: () =>
