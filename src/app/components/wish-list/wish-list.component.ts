@@ -1,10 +1,10 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TermTextPipe } from '../../pipes/term-text.pipe';
 import { CartService } from '../../services/cart.service';
 import { WishListService } from '../../services/wish-list.service';
-import { TermTextPipe } from '../../pipes/term-text.pipe';
-import { RouterModule } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
 import { ProductComponent } from '../product/product.component';
 
 @Component({

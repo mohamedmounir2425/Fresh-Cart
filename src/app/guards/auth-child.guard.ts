@@ -8,7 +8,7 @@ export const authChildGuard: CanActivateChildFn = (childRoute, state) => {
   const router = inject(Router);
   if (token) {
     const decode = jwtDecode<CustomJWTdecode>(token);
-    return decode.name ? true : false;
+    return true;
   }
 
   router.navigate(['/login']);

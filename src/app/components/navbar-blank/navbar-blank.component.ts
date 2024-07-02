@@ -13,13 +13,9 @@ import { WishListService } from '../../services/wish-list.service';
   styleUrl: './navbar-blank.component.scss',
 })
 export class NavbarBlankComponent implements OnInit {
-  scrolled: boolean = false;
   cartCount: number = 0;
   favCount: number = 0;
-  @HostListener('window:scroll')
-  onWindowScroll() {
-    this.scrolled = window.scrollY > 0;
-  }
+
   constructor(
     private _AuthService: AuthService,
     private _CartService: CartService,

@@ -43,18 +43,15 @@
 
       }
     </div>
+    <div class="d-flex flex-column flex-sm-row justify-content-sm-between">
+      <a routerLink="/updatePassword" class="mb-2 mb-sm-0">Forget Password</a>
+      <button [disabled]="loginForm.invalid" type="submit" class="main-btn">
+        Sign in @if(fetching) {
 
-    <button
-      [disabled]="loginForm.invalid"
-      type="submit"
-      class="main-btn float-end"
-    >
-      Sign in @if(fetching) {
-
-      <span><i class="fa-solid fa-spinner fa-spin"></i></span>
-      }
-    </button>
-    <div class="clearfix"></div>
+        <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+        }
+      </button>
+    </div>
     @if(errMsg) {
 
     <div class="alert alert-danger mt-2">

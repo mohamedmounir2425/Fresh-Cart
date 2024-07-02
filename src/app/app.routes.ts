@@ -27,6 +27,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'cart', component: CartComponent },
       { path: 'wishList', component: WishListComponent },
+
       {
         path: 'allorders',
         loadComponent: () =>
@@ -35,13 +36,7 @@ export const routes: Routes = [
           ),
       },
       { path: 'payment', component: PaymentComponent },
-      {
-        path: 'updatePassword',
-        loadComponent: () =>
-          import(
-            './components/settings/update-password/update-password.component'
-          ).then((m) => m.UpdatePasswordComponent),
-      },
+
       {
         path: 'products',
         component: ProductsPageComponent,
@@ -68,6 +63,13 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      {
+        path: 'updatePassword',
+        loadComponent: () =>
+          import(
+            './components/settings/update-password/update-password.component'
+          ).then((m) => m.UpdatePasswordComponent),
+      },
     ],
   },
   { path: '**', component: NotfoundComponent },
