@@ -1,0 +1,46 @@
+@import "../../../styles.scss";
+
+.columns {
+  columns: 4 !important;
+}
+@include tablet {
+  .columns {
+    columns: 3 !important;
+  }
+}
+@include mobile {
+  .columns {
+    columns: 2 !important;
+  }
+}
+
+.columns-son {
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.columns-son-style {
+  background-color: yellow;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.columns-son:hover .columns-son-style {
+  top: 0;
+}
+.columns-son img {
+  transition: 0.3s;
+}
+.columns-son:hover img {
+  scale: 1.2;
+}

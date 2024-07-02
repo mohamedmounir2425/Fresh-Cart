@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ProductComponent } from '../product/product.component';
 import { ProductsService } from '../../services/products.service';
 import { CartService } from '../../services/cart.service';
@@ -24,6 +30,7 @@ import { SearchPipe } from '../../pipes/search.pipe';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductsComponent implements OnInit, OnDestroy {
+  @Input() categoryId: string = '';
   supscribeId!: Subscription;
   products!: any[];
   wishListData: string[] = [];
@@ -40,7 +47,31 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private _WishListService: WishListService
   ) {}
   ngOnInit(): void {
-    this.fetchProducts();
+    this.isLoading = true;
+    this.supscribeId = this._ProductsService
+      .getProducts(undefined, this.categoryId)
+      .subscribe({
+        next: (res) => {
+          if (this.categoryId) {
+            this.products = res.data.filter(
+              (product: any) => product.category._id === this.categoryId
+            );
+            this.totalItems = this.products.length;
+            this.itemsPerPage = 18;
+            this.currentPage = 1;
+          } else {
+            this.products = res.data;
+            this.totalItems = res.results;
+            this.itemsPerPage = res.metadata.limit;
+            this.currentPage = res.metadata.currentPage;
+          }
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error(err);
+          this.isLoading = false;
+        },
+      });
     this._CartService.getCart().subscribe({
       next: (res) => {
         this.cart = res.data.products;
@@ -65,23 +96,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
       error: (err) => console.log(err),
     });
   }
-  fetchProducts(pageNum?: number) {
-    this.isLoading = true;
-    this.supscribeId = this._ProductsService.getProducts(pageNum).subscribe({
-      next: (res) => {
-        console.log(res);
+  fetchProducts(pageNum: number) {
+    if (!this.categoryId) {
+      this.isLoading = true;
+      this.supscribeId = this._ProductsService
+        .getProducts(pageNum, this.categoryId)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
 
-        this.products = res.data;
-        this.totalItems = res.results;
-        this.itemsPerPage = res.metadata.limit;
-        this.currentPage = res.metadata.currentPage;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error(err);
-        this.isLoading = false;
-      },
-    });
+            this.products = res.data;
+            this.totalItems = res.results;
+            this.itemsPerPage = res.metadata.limit;
+            this.currentPage = res.metadata.currentPage;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.error(err);
+            this.isLoading = false;
+          },
+        });
+    } else {
+      this.currentPage = pageNum;
+    }
   }
   pageChanged(event: any) {
     this.fetchProducts(event);

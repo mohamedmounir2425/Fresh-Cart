@@ -14,6 +14,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { ProductsPageComponent } from './components/productsPage/productsPage.component';
+import { CategoryProductsComponent } from './components/categories/category-products/category-products.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesComponent,
+      },
+      {
+        path: 'categories/:id',
+        component: CategoryProductsComponent,
       },
       { path: 'brands', component: BrandsComponent },
     ],

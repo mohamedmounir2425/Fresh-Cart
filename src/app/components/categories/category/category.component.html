@@ -1,0 +1,8 @@
+<div
+  [routerLink]="['/categories', category._id]"
+  class="columns-son position-relative"
+  style="cursor: pointer"
+>
+  <img [src]="category.image" [alt]="category.name" class="w-100" />
+  <p class="p-2 position-absolute columns-son-style">{{ category.name }}</p>
+</div>

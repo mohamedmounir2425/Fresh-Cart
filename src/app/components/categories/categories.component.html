@@ -1,1 +1,11 @@
-<p>categories works!</p>
+@if(!isLoading ) {
+<div class="container my-5">
+  <div class="columns">
+    @for(category of categories;track category.id) {
+    <app-category [category]="category"></app-category>
+    }
+  </div>
+</div>
+}@else {
+<app-loading-products></app-loading-products>
+}

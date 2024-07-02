@@ -16,6 +16,10 @@
         [wishListData]="wishListData"
       ></app-product>
     </div>
+    } @if(products.length === 0) {
+    <div class="my-5 alert alert-secondary w-50 mx-auto text-center">
+      No Products available
+    </div>
     }
   </div>
   <div class="d-flex justify-content-center mt-4">
