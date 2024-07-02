@@ -3,15 +3,22 @@ import { ProductComponent } from '../product/product.component';
 import { ProductsService } from '../../services/products.service';
 import { CartService } from '../../services/cart.service';
 import { WishListService } from '../../services/wish-list.service';
-import { Category } from '../../Interfaces/category';
 import { LoadingProductsComponent } from './loading-products/loading-products.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../../pipes/search.pipe';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductComponent, LoadingProductsComponent, NgxPaginationModule],
+  imports: [
+    ProductComponent,
+    LoadingProductsComponent,
+    NgxPaginationModule,
+    FormsModule,
+    SearchPipe,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -22,6 +29,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   wishListData: string[] = [];
   cart!: any[];
   isLoading: boolean = false;
+  searchTerm: string = '';
   // pagination
   totalItems: number = 0;
   itemsPerPage: number = 0;

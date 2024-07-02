@@ -6,3 +6,8 @@
 .ngx-pagination a {
   text-decoration: none !important;
 }
+
+.form-control:focus {
+  border-color: $main-color;
+  box-shadow: 0 0 0.5rem 0.15rem #0aad0a69;
+}

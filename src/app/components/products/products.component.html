@@ -1,8 +1,14 @@
 @if(!isLoading) {
 <section>
+  <input
+    type="search"
+    class="w-50 mx-auto form-control mb-4"
+    placeholder="Search by title..."
+    [(ngModel)]="searchTerm"
+  />
   <div class="row">
-    @for(product of products | paginate: { id: 'product', itemsPerPage,
-    totalItems, currentPage, };track product.id) {
+    @for(product of products | paginate: { id: 'product', itemsPerPage ,
+    totalItems, currentPage, } | search: searchTerm ;track product.id) {
     <div class="col-sm-6 col-md-4 col-lg-2 p-2">
       <app-product
         [product]="product"
