@@ -1,1 +1,21 @@
-<p>brands works!</p>
+<div class="container my-5" style="paddingtop: 74.49px">
+  <div class="row g-3">
+    @if(!isLoading) { @for(brand of brands;track brand._id){
+    <div
+      class="col-lg-2 col-md-4 col-sm-6 btn p-3"
+      style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; cursor: pointer"
+    >
+      <app-brand [brand]="brand"></app-brand>
+    </div>
+    } }@else { @for(i of [1,2,3,4,5,6];track i){
+    <div
+      class="col-lg-2 col-md-4 col-sm-6 btn p-3"
+      style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; cursor: pointer"
+    >
+      <h5 class="card-title placeholder-glow py-4">
+        <span class="placeholder bg-secondary col-10"></span>
+      </h5>
+    </div>
+    } }
+  </div>
+</div>

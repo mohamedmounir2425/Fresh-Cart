@@ -15,6 +15,7 @@ import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.compon
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { ProductsPageComponent } from './components/productsPage/productsPage.component';
 import { CategoryProductsComponent } from './components/categories/category-products/category-products.component';
+import { BrandProductsComponent } from './components/brands/brand-products/brand-products.component';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,7 @@ export const routes: Routes = [
         component: CategoryProductsComponent,
       },
       { path: 'brands', component: BrandsComponent },
+      { path: 'brands/:id', component: BrandProductsComponent },
     ],
   },
   {

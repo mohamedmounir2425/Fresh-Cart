@@ -31,6 +31,7 @@ import { SearchPipe } from '../../pipes/search.pipe';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   @Input() categoryId: string = '';
+  @Input() brandId: string = '';
   supscribeId!: Subscription;
   products!: any[];
   wishListData: string[] = [];
@@ -49,12 +50,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
     this.supscribeId = this._ProductsService
-      .getProducts(undefined, this.categoryId)
+      .getProducts(undefined, this.categoryId || this.brandId)
       .subscribe({
         next: (res) => {
           if (this.categoryId) {
             this.products = res.data.filter(
               (product: any) => product.category._id === this.categoryId
+            );
+            this.totalItems = this.products.length;
+            this.itemsPerPage = 18;
+            this.currentPage = 1;
+          } else if (this.brandId) {
+            this.products = res.data.filter(
+              (product: any) => product.brand._id === this.brandId
             );
             this.totalItems = this.products.length;
             this.itemsPerPage = 18;
@@ -97,7 +105,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
   fetchProducts(pageNum: number) {
-    if (!this.categoryId) {
+    if (!this.categoryId && !this.brandId) {
       this.isLoading = true;
       this.supscribeId = this._ProductsService
         .getProducts(pageNum, this.categoryId)

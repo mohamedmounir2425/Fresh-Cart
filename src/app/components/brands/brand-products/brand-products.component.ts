@@ -3,21 +3,21 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsComponent } from '../../products/products.component';
 
 @Component({
-  selector: 'app-category-products',
+  selector: 'app-brand-products',
   standalone: true,
   imports: [ProductsComponent],
-  templateUrl: './category-products.component.html',
-  styleUrl: './category-products.component.scss',
+  templateUrl: './brand-products.component.html',
+  styleUrl: './brand-products.component.scss',
 })
-export class CategoryProductsComponent implements OnInit {
-  categoryId!: string;
+export class BrandProductsComponent implements OnInit {
+  brandId!: string;
   constructor(private _ActivatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this._ActivatedRoute.params.subscribe({
       next: (res) => {
         console.log(res);
-        this.categoryId = res['id'];
+        this.brandId = res['id'];
       },
       error: (err) => console.log(err),
     });
