@@ -19,6 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   product: any;
   cartCount: number = 0;
   isLoading: boolean = false;
+  FetchingProduct: boolean = false;
   productOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -40,6 +41,7 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.FetchingProduct = true;
     this.route.params.subscribe({
       next: (route) => {
         console.log({ route });
@@ -50,9 +52,11 @@ export class ProductDetailsComponent implements OnInit {
       next: ({ data }) => {
         console.log(data);
         this.product = data;
+        this.FetchingProduct = false;
       },
       error: (err) => {
         console.error(err);
+        this.FetchingProduct = false;
       },
     });
     this._CartService.getCart().subscribe({
